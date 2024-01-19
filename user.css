@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nocard {
+  width: 90vw;
+  height: 150px;
+  display: flex;
+  align-items: center;
+}
+
+.nocard .profile {
+  height: inherit;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.nocard .profile img {
+  border: 2px solid;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  padding: 3px;
+  margin-left: 20px;
+}
+
+.nocard .profileside {
+  width: 50vw;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.forpagerender {
+  width: 90vw;
+  display: grid;
+  grid-template-columns: 49% 49%;
+  grid-template-rows: 18% 18% 18% 18% 18%;
+  gap: 10px;
+}
+
+.forpagerender .maincard {
+  border: 2px solid;
+  height: 90px;
+  padding-left: 5px;
+}
+
+.forpagerender .maincard h1 {
+  font-size: 12px;
+  color: blue;
+}
+.forpagerender .maincard h2 {
+  font-size: 10px;
+
+  height: 25px;
+}

@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.form {
+  background-color: rgba(128, 128, 128, 0.673);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 350px;
+  height: 150px;
+}
+
+.form .details {
+  align-items: center;
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form .details input {
+  height: 50px;
+  width: 200px;
+}
