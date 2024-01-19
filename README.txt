@@ -13,6 +13,6 @@ ivey
 alternatively can use link: https://api.github.com/users to find users
 
 I dont find any links for the tag sections so i have used the 
-language used which gives the tag result. Thus, the section
+language details present in the repos content populates the tag section. Thus, the section
 to get multiple section i cant get done.
 
