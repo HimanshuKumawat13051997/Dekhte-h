@@ -34,7 +34,6 @@ $(document).ready(function () {
   });
 
   async function fetchData(page, itemsPerPage) {
-    // Assuming you have an API endpoint for fetching data
     const apiUrl = `${userFound.repos_url}?page=${page}&per_page=${itemsPerPage}`;
 
     return await fetch(apiUrl)
@@ -48,31 +47,36 @@ $(document).ready(function () {
       .then((response) => response.json())
       .then((data) => data.length);
   }
-  // Display data on the page
+  // For data display at page
   function displayData(data) {
     $(".forpagerender").empty();
     data.map((item) => {
       $(".forpagerender").append(`<div class="maincard">
     <h1>${item.name}</h1>
     <h2>${item.description}</h2>
-    <span class="badge text-bg-primary">Primary</span>
+    <span class="badge text-bg-primary">${
+      item.language ? item.language : "Not Present"
+    }</span>
   </div>`);
     });
   }
 
-  // Pagination logic
+  // logic for pagination
   let currentPage = 1;
-  const itemsPerPage = 10; // Adjust this based on the number of items per page
+  const itemsPerPage = 10;
+
   let totalItems;
   let totalPages;
-
+  const maxNumericButtons = 5;
   function createNumericButtons() {
     const paginationContainer = document.getElementById("numericPagination");
 
-    // Clear existing buttons
     paginationContainer.innerHTML = "";
 
-    for (let i = 1; i <= totalPages; i++) {
+    let start = Math.max(1, currentPage - Math.floor(maxNumericButtons / 2));
+    let end = Math.min(start + maxNumericButtons - 1, totalPages);
+
+    for (let i = start; i <= end; i++) {
       const button = document.createElement("button");
       button.classList.add("page-link");
       button.innerText = i;
@@ -95,22 +99,18 @@ $(document).ready(function () {
 
   function updatePaginationButtons() {
     document.getElementById("prevButton").disabled = currentPage === 1;
-    // You should have a way to determine the total number of pages from your server response
-    // In this example, assuming total pages are hardcoded to 5
     document.getElementById("nextButton").disabled = currentPage === totalPages;
     updateNumericButtons();
   }
   showLoader();
   function loadPage(pageNumber) {
-    // Check if the requested page is within valid bounds
     if (pageNumber >= 1 && (!totalPages || pageNumber <= totalPages)) {
-      totalnumberPage() // Call totalnumberPage to get the total number of items
-        .then((totalCount) => {
-          totalItems = totalCount;
-          totalPages = Math.ceil(totalItems / itemsPerPage);
-          createNumericButtons();
-          return fetchData(pageNumber, itemsPerPage);
-        });
+      totalnumberPage().then((totalCount) => {
+        totalItems = totalCount;
+        totalPages = Math.ceil(totalItems / itemsPerPage);
+        createNumericButtons();
+        return fetchData(pageNumber, itemsPerPage);
+      });
       fetchData(pageNumber, itemsPerPage)
         .then((data) => {
           displayData(data);
@@ -124,7 +124,6 @@ $(document).ready(function () {
     }
   }
 
-  // Event listeners for pagination buttons
   document
     .getElementById("prevButton")
     .addEventListener("click", () => loadPage(currentPage - 1));
@@ -132,6 +131,5 @@ $(document).ready(function () {
     .getElementById("nextButton")
     .addEventListener("click", () => loadPage(currentPage + 1));
 
-  // Initial data load
   loadPage(currentPage);
 });
